@@ -54,7 +54,7 @@ Modelo_trabalho = {100 :'Presencial',
                    0: 'Remoto'}
 df['Modelo_trabalho'] = df['Modelo_trabalho'].replace(Modelo_trabalho)
 df['Modelo_trabalho'].value_counts()
-# %% Olhando como a tabala está
+# %% Olhando a tabala
 df.head()
 # %% Remove os dados nulos da tabela
 df_limpo = df.dropna()
@@ -68,4 +68,37 @@ df_limpo.info()
 df_limpo = df_limpo.assign(Ano = df_limpo['Ano'].astype('int64'))
 # %%
 df_limpo.head()
+# %%
+import seaborn as sns
+# %% Grafico anual senioridade
+sns.barplot(data = df_limpo, x='Senioridade', y= 'Dolar')
+# %%
+import matplotlib.pyplot as plt
+# %%
+plt.figure(figsize=(8,5))
+sns.barplot(data = df_limpo, x='Senioridade', y= 'Dolar')
+plt.title('Salario medio de Senioridade')
+plt.xlabel('Senioridade')
+plt.ylabel('Salario medio anual (Dolar)')
+plt.show()
+# %% Chama o dado limpo do grupo Senioriade com os dados em dolar,
+# 'Mean' faz a media de todos os valores e ascending false vai do maior pro menor.
+df_limpo.groupby('Senioridade')['Dolar'].mean().sort_values(ascending=False)
+# %% Dando nome de ordem 
+ordem = df_limpo.groupby('Senioridade')['Dolar'].mean().sort_values(ascending=False).index
+ordem
+# %%
+plt.figure(figsize=(8,5))
+sns.barplot(data = df_limpo, x='Senioridade', y= 'Dolar',order=ordem)
+plt.title('Media salarial de senioridade')
+plt.xlabel('Senioridade')
+plt.ylabel('Salario medio anual (Dolar)')
+plt.show()
+# %%
+plt.figure(figsize=(8,5))
+sns.histplot(df_limpo['Dolar'], bins = 50, kde = True)
+plt.title('Distribuiçâo dos salarios anuais')
+plt.xlabel('Salario Dolar')
+plt.ylabel('Frequencia)')
+plt.show()
 # %%
