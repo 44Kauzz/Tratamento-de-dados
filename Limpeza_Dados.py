@@ -1,7 +1,7 @@
 # %%
 import pandas as pd
 # %% Chamando a tabala CSV para poder limpar os dados
-df = pd.read_csv('https://raw.githubusercontent.com/guilhermeonrails/data-jobs/refs/heads/main/salaries.csv')
+df = pd.read_csv('Dados-profissao-dados.csv')
 # %% Ver a tabela 
 df.head()
 # %% Apenas vê as colunas da tabala
@@ -101,4 +101,7 @@ plt.title('Distribuiçâo dos salarios anuais')
 plt.xlabel('Salario Dolar')
 plt.ylabel('Frequencia)')
 plt.show()
+# %% trasformar os dados em CSV
+df_limpo.to_csv('Dados-profissao-dados.csv', index=False)
 # %%
+ 
